@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Recovery">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Para poder entrenar el musculo necessitas recuperar."
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textAlignment="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:id="@+id/recovery_recycler_view"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/seperator"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="136dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/recovery_workout"
+                android:layout_width="100dp"
+                android:layout_marginStart="18dp"
+                android:background="@drawable/workout"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            >
+            <Button
+                android:layout_width="100dp"
+                android:layout_marginStart="18dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/recovery"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            >
+            <Button
+                android:id="@+id/recovery_log"
+                android:layout_width="100dp"
+                android:layout_marginStart="25dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/log"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:text="WORKOUT"
+            android:textColor="#000000"
+            android:textAlignment="center" />
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:text="RECOVERY"
+            android:textAlignment="center" />
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:text="LOG"
+            android:textColor="#000000"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+</LinearLayout>
