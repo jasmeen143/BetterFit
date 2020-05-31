@@ -20,12 +20,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BetterFit";
     // TAULA CON MUSCULOS
     private static final String TABLE_MUSCULOS = "muscles";
-    //CAMPS DE LA BASE DE DADES
+    //CAMPS DE LA BASE DE TAULA
     private static final String KEY_MUSCLE_NAME = "nombre";
     private static final String KEY_MUSCLE_DESCRIPTION = "description";
     private static final String KEY_MUSCLE_IMAGE = "image";
     private static final String KEY_MUSCLE_ENTRENADO = "trained";
+
+    // TAULA CON LOG
+    private static final String TABLE_LOG = "log";
+    //CAMPS DE LA BASE DE TAULA
     private static final String KEY_MUSCLE_DATETIME = "traineddate";
+
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,8 +38,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String Create_Table = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME " + ")";
-        db.execSQL(Create_Table);
+        String createTableMuscles = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL " + ")";
+        String createTableLog = "CREATE TABLE " + TABLE_LOG + "(" + KEY_MUSCLE_NAME + " TEXT NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME, FOREIGN KEY (" + KEY_MUSCLE_NAME + ") REFERENCES " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + ") ON DELETE CASCADE" + ")";
+        db.execSQL(createTableMuscles);
+        db.execSQL(createTableLog);
+        db.execSQL("PRAGMA foreign_keys = ON;");
         System.out.println("Base de datos creado");
     }
 
@@ -42,6 +50,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //DROP SI EXISTEIX
         db.execSQL("DROP TABLE  IF EXISTS " + TABLE_MUSCULOS);
+
         // CREAR LA TABLA DE NOU
         onCreate(db);
     }

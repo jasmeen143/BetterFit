@@ -23,7 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="1df06ded-c779-4cb7-a6af-2886d0b66f56">
+        <schema name="main" object-types="constraint, index, view, column, dataset trigger, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="1df06ded-c779-4cb7-a6af-2886d0b66f56">
@@ -37,6 +41,7 @@
     <connection id="1df06ded-c779-4cb7-a6af-2886d0b66f56" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="1df06ded-c779-4cb7-a6af-2886d0b66f56" dataset="main.log" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="1df06ded-c779-4cb7-a6af-2886d0b66f56" dataset="main.muscles" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="1df06ded-c779-4cb7-a6af-2886d0b66f56" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
   </component>
