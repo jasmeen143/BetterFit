@@ -25,6 +25,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String KEY_MUSCLE_DESCRIPTION = "description";
     private static final String KEY_MUSCLE_IMAGE = "image";
     private static final String KEY_MUSCLE_ENTRENADO = "trained";
+    private static final String KEY_MUSCLE_DATETIME = "traineddate";
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,7 +33,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String Create_Table = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL " + ")";
+        String Create_Table = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME " + ")";
         db.execSQL(Create_Table);
         System.out.println("Base de datos creado");
     }
