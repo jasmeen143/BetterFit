@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         List<Integer>  intege;
                         intege = new ArrayList<>();
 
-
                         int musclePosInAllMusclesList=0;
                         for (int i=0; i<allMuscles.size();i++){
                             if (allMuscles.get(i).getNombre().equalsIgnoreCase(musclesNames.get(position))){
@@ -81,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         recyclerView.setAdapter(recylerAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
+                        Intent intent = new Intent(MainActivity.this, MuscleTraining.class);
+                        intent.putExtra("MuscleName",  allMuscles.get(musclePosInAllMusclesList).getNombre());
+                        finishAffinity();
+                        startActivity(intent);
+
                         noNameMethod();
 
                         recylerAdapter = new RecylerAdapter(MainActivity.this, musclesNames, muscleImages, muscleDescriptions);
@@ -93,11 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         textView1.setText(label1);
                         textView2.setText(label2);
 
-
                         Toast.makeText(MainActivity.this, allMuscles.get(musclePosInAllMusclesList).getNombre()+" clicked", Toast.LENGTH_SHORT).show();
                     }
                     @Override public void onLongItemClick(View view, int position) {
-                        Toast.makeText(MainActivity.this, "long click", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "long clicked", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
@@ -126,27 +129,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void noNameMethod(){
-        List<Muscle> alreadyTrained = db.getTrainedMuscle();
+        List<Muscle> NotTrained = db.getNotTrainedMuscles();
         muscleDescriptions= new ArrayList<>();
         muscleImages= new ArrayList<>();
         musclesNames= new ArrayList<>();
         muscleTrained= new ArrayList<>();
-        if (alreadyTrained.size()>0) {
-            for (int i = 0; i < allMuscles.size(); i++) {
-                Muscle m = allMuscles.get(i);
-                boolean alreadTrained = false;
-                for (int j = 0; j < alreadyTrained.size(); j++) {
-                    if (m.getNombre().equalsIgnoreCase(alreadyTrained.get(j).getNombre())) {
-                        alreadTrained = true;
-                        break;
-                    }
-                }
-                if (!alreadTrained) {
-                    muscleImages.add(m.getImage());
-                    musclesNames.add(m.getNombre());
-                    muscleDescriptions.add(m.getDescription());
-                    muscleTrained.add(m.isTrained());
-                }
+        if (NotTrained.size()>0) {
+            for (int i = 0; i < NotTrained.size(); i++) {
+                Muscle m = NotTrained.get(i);
+                muscleImages.add(m.getImage());
+                musclesNames.add(m.getNombre());
+                muscleDescriptions.add(m.getDescription());
+                muscleTrained.add(m.isTrained());
             }
             label1="Muscles to train\n"+(allMuscles.size()-db.getTrainedMuscle().size());
             label2="Muscles to recover\n"+db.getTrainedMuscle().size();

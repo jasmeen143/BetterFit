@@ -1,6 +1,8 @@
 package singh.betterfit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recovery extends AppCompatActivity implements View.OnClickListener{
     Intent intent;
     Button log,workout;
+    RecyclerView recyclerView;
 
+    List<Muscle> allMuscles;
+    List<Integer> muscleImages;
+    List<String> musclesNames;
+    List<String> muscleDescriptions;
+    List<Boolean> muscleTrained;
+    Muscle muscleInstance;
+    DatabaseManager db;
 
 
     @Override
@@ -23,7 +36,33 @@ public class Recovery extends AppCompatActivity implements View.OnClickListener{
 
         log.setOnClickListener(this);
         workout.setOnClickListener(this);
+
+        db = new DatabaseManager(this);
+        muscleInstance = new Muscle();
+        allMuscles =  db.getAllMuscles();
+
+        List<Muscle> alreadyTrained = db.getTrainedMuscle();
+        muscleDescriptions = new ArrayList<>();
+        muscleImages = new ArrayList<>();
+        musclesNames = new ArrayList<>();
+        muscleTrained = new ArrayList<>();
+        if (alreadyTrained.size() > 0) {
+            for (int j = 0; j < alreadyTrained.size(); j++) {
+                muscleImages.add(alreadyTrained.get(j).getImage());
+                musclesNames.add(alreadyTrained.get(j).getNombre());
+                muscleDescriptions.add(alreadyTrained.get(j).getDescription());
+                muscleTrained.add(alreadyTrained.get(j).isTrained());
+            }
+        }
+
+        recyclerView=findViewById(R.id.recovery_recycler_view);
+
+        RecylerAdapter recylerAdapter = new RecylerAdapter(this, musclesNames, muscleImages, muscleDescriptions);
+        recyclerView.setAdapter(recylerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -43,4 +82,5 @@ public class Recovery extends AppCompatActivity implements View.OnClickListener{
                 break;
         }
     }
+
 }

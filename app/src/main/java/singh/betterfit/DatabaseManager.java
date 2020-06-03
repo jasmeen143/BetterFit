@@ -13,8 +13,6 @@ import java.util.List;
 
 public class DatabaseManager extends SQLiteOpenHelper {
 
-
-
     private static final int DATABASE_VERSION = 1;
     //NOM DE LA BASE DE DADES
     private static final String DATABASE_NAME = "BetterFit";
@@ -39,7 +37,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableMuscles = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL " + ")";
-        String createTableLog = "CREATE TABLE " + TABLE_LOG + "(" + KEY_MUSCLE_NAME + " TEXT NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME, FOREIGN KEY (" + KEY_MUSCLE_NAME + ") REFERENCES " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + ") ON DELETE CASCADE" + ")";
+        String createTableLog = "CREATE TABLE IF NOT EXISTS " + TABLE_LOG + "(" + KEY_MUSCLE_NAME + " TEXT NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME, FOREIGN KEY (" + KEY_MUSCLE_NAME + ") REFERENCES " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + ") ON DELETE CASCADE" + ")";
         db.execSQL(createTableMuscles);
         db.execSQL(createTableLog);
         db.execSQL("PRAGMA foreign_keys = ON;");
@@ -122,7 +120,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return muscles;
     }
 
-    public List<Muscle> getMusclesToRecover(){
+    public List<Muscle> getNotTrainedMuscles(){
         List<Muscle> muscles = new ArrayList<Muscle>();
         String selectCategoria = "SELECT * FROM " + TABLE_MUSCULOS + " WHERE "+KEY_MUSCLE_ENTRENADO+" = 0";
         SQLiteDatabase db = this.getWritableDatabase();
