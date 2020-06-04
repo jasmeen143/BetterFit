@@ -29,19 +29,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     //CAMPS DE LA BASE DE TAULA
     private static final String KEY_MUSCLE_DATETIME = "traineddate";
 
-    //TABLA CON LINKS DE EXERCICIOS
-    private static final String TABLE_EXERCISES = "exercises";
-    //CAMPS DE LA BASE DE TAULA
-    private static final String KEY_MUSCLE_EXERCISE_NAME = "exname";
-    private static final String KEY_MUSCLE_EXERCISE_LINK = "exlink";
-
-    //TABLA CON LINKS DE STRETCHES
-    private static final String TABLE_STRETCHES = "stretches";
-    //CAMPS DE LA BASE DE TAULA
-    private static final String KEY_MUSCLE_STRETCH_NAME = "strname";
-    private static final String KEY_MUSCLE_STRETCH_LINK = "strlink";
-
-
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -50,13 +37,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableMuscles = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL " + ")";
         String createTableLog = "CREATE TABLE IF NOT EXISTS " + TABLE_LOG + "(" + KEY_MUSCLE_NAME + " TEXT NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME, FOREIGN KEY (" + KEY_MUSCLE_NAME + ") REFERENCES " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + ") ON DELETE CASCADE" + ")";
-        String createTableExercises = "";
-        String createTableStretches = "";
+
         db.execSQL(createTableMuscles);
         db.execSQL(createTableLog);
-        db.execSQL(createTableExercises);
-        db.execSQL(createTableStretches);
         db.execSQL("PRAGMA foreign_keys = ON;");
+
         System.out.println("Base de datos creado");
     }
 
@@ -65,8 +50,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         //DROP SI EXISTEIX
         db.execSQL("DROP TABLE  IF EXISTS " + TABLE_MUSCULOS);
         db.execSQL("DROP TABLE  IF EXISTS " + TABLE_LOG);
-        db.execSQL("DROP TABLE  IF EXISTS " + TABLE_EXERCISES);
-        db.execSQL("DROP TABLE  IF EXISTS " + TABLE_STRETCHES);
         // CREAR LA TABLA DE NOU
         onCreate(db);
     }
@@ -93,34 +76,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
             }
             db.close();
     }
-    /*
-    public void insertAllExercises(){
-        Muscle muscleInstance = new Muscle();
-        Exercise exerciseInstance = new Exercise();
-
-        List<String> muscleNames = muscleInstance.addNames();
-        List<String> exNames = exerciseInstance.getAllExNames();
-        List<String> exLink = exerciseInstance.getAllExLinks();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        for (int i = 0; i < muscleNames.size(); i++) {
-            ContentValues valors = new ContentValues();
-
-            valors.put(KEY_MUSCLE_DESCRIPTION, muscleDescriptions.get(i));
-            valors.put(KEY_MUSCLE_ENTRENADO, muscleTrained.get(i));
-            valors.put(KEY_MUSCLE_NAME, musclesNames.get(i));
-            valors.put(KEY_MUSCLE_IMAGE, muscleImages.get(i));
-
-            //Instertar a tabla productes
-            db.insert(TABLE_EXERCISES, null, valors);
-        }
-        db.close();
-    }
-
-    public void insertAllStretches(){
-
-    }*/
 
     public List<Muscle> getAllMuscles(){
         List<Muscle> muscles = new ArrayList<Muscle>();
