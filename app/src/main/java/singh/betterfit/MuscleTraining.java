@@ -63,10 +63,8 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
     public void addItemsOnSpinner() {
 
         List<String> list = new ArrayList<String>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
+        list.add("EXERCISES");
+        list.add("STRETCHES");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
@@ -99,7 +97,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.btnSubmit:
-                
+
                 break;
         }
     }

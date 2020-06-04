@@ -93,6 +93,34 @@ public class DatabaseManager extends SQLiteOpenHelper {
             }
             db.close();
     }
+    /*
+    public void insertAllExercises(){
+        Muscle muscleInstance = new Muscle();
+        Exercise exerciseInstance = new Exercise();
+
+        List<String> muscleNames = muscleInstance.addNames();
+        List<String> exNames = exerciseInstance.getAllExNames();
+        List<String> exLink = exerciseInstance.getAllExLinks();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        for (int i = 0; i < muscleNames.size(); i++) {
+            ContentValues valors = new ContentValues();
+
+            valors.put(KEY_MUSCLE_DESCRIPTION, muscleDescriptions.get(i));
+            valors.put(KEY_MUSCLE_ENTRENADO, muscleTrained.get(i));
+            valors.put(KEY_MUSCLE_NAME, musclesNames.get(i));
+            valors.put(KEY_MUSCLE_IMAGE, muscleImages.get(i));
+
+            //Instertar a tabla productes
+            db.insert(TABLE_EXERCISES, null, valors);
+        }
+        db.close();
+    }
+
+    public void insertAllStretches(){
+
+    }*/
 
     public List<Muscle> getAllMuscles(){
         List<Muscle> muscles = new ArrayList<Muscle>();

@@ -9,15 +9,19 @@ public class Muscle {
     private String description;
     private int image;
     private boolean trained;
+    private List<Exercise> exercises;
+    private List<Stretches> stretches;
 
     public Muscle() {
     }
 
-    public Muscle(String nombre, String description, int image,boolean trained) {
+    public Muscle(String nombre, String description, int image,boolean trained, List<Exercise> exercises, List<Stretches> stretches) {
         this.nombre = nombre;
         this.description = description;
         this.image = image;
         this.trained = trained;
+        this.exercises = exercises;
+        this.stretches = stretches;
     }
 
     public boolean isTrained() {
@@ -50,6 +54,22 @@ public class Muscle {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+    public List<Stretches> getStretches() {
+        return stretches;
+    }
+
+    public void setStretches(List<Stretches> stretches) {
+        this.stretches = stretches;
     }
 
     public List<String> addNames() {
@@ -91,19 +111,19 @@ public class Muscle {
     public List<Integer> addImages() {
         List<Integer> images = new ArrayList<Integer>();
 
-        images.add(R.drawable.abs);
-        images.add(R.drawable.biceps);
-        images.add(R.drawable.calves);
-        images.add(R.drawable.chest);
-        images.add(R.drawable.forearms);
-        images.add(R.drawable.glutes);
-        images.add(R.drawable.hamstrings);
-        images.add(R.drawable.lats);
-        images.add(R.drawable.midback);
-        images.add(R.drawable.quadriceps);
-        images.add(R.drawable.shoulders);
-        images.add(R.drawable.traps);
-        images.add(R.drawable.triceps);
+        images.add(R.drawable.muscle_abs);
+        images.add(R.drawable.muscle_biceps);
+        images.add(R.drawable.muscle_calves);
+        images.add(R.drawable.muscle_chest);
+        images.add(R.drawable.muscle_forearms);
+        images.add(R.drawable.muscle_glutes);
+        images.add(R.drawable.muscle_hamstrings);
+        images.add(R.drawable.muscle_lats);
+        images.add(R.drawable.muscle_midback);
+        images.add(R.drawable.muscle_quadriceps);
+        images.add(R.drawable.muscle_shoulders);
+        images.add(R.drawable.muscle_traps);
+        images.add(R.drawable.muscle_triceps);
 
         return images;
     }
