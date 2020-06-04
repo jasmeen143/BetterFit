@@ -56,7 +56,7 @@
                 android:id="@+id/muscleTraining_workout"
                 android:layout_width="100dp"
                 android:layout_marginStart="18dp"
-                android:background="@drawable/workout"
+                android:background="@drawable/menu_workout"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 />
@@ -72,7 +72,7 @@
                 android:layout_width="100dp"
                 android:layout_marginStart="18dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/recovery"
+                android:background="@drawable/menu_recovery"
                 />
         </LinearLayout>
         <LinearLayout
@@ -84,7 +84,7 @@
                 android:layout_width="100dp"
                 android:layout_marginStart="25dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/log"
+                android:background="@drawable/menu_log"
                 android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>
