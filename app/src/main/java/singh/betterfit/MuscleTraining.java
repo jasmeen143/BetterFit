@@ -21,16 +21,19 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
     Button muscleTraining_workout, muscleTraining_log, muscleTraining_recovery, btnSubmit;
     Spinner spinner;
 
-    List<Muscle> allMuscles;
-    DatabaseManager db;
-    Muscle muscle;
+    Exercise exerciseInstance;
+    Stretches stretchesInstance;
+    List<Exercise> allExercises;
+    List<Stretches> allStretches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muscle_training);
 
-        db = new DatabaseManager(this);
+        allExercises = exerciseInstance.getAllExercises();
+        allStretches = stretchesInstance.getAllStretches();
+
         spinner = findViewById(R.id.spinner);
         btnSubmit = findViewById(R.id.btnSubmit);
 
@@ -48,24 +51,13 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         muscleTraining_recovery.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
 
-        allMuscles = db.getAllMuscles();
-        for (Muscle m : allMuscles){
-            if (m.getNombre().equalsIgnoreCase(textViewText)){
-                muscle = m;
-                break;
-            }
-        }
-
         addItemsOnSpinner();
-
     }
 
     public void addItemsOnSpinner() {
-
         List<String> list = new ArrayList<String>();
         list.add("EXERCISES");
         list.add("STRETCHES");
-
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,6 +89,8 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.btnSubmit:
+
+
 
                 break;
         }
