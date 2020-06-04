@@ -123,8 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finishAffinity();
                 startActivity(intent);
                 break;
-            default:
-                System.out.println("nothing Clicked");
         }
     }
 

@@ -5,20 +5,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MuscleTraining extends AppCompatActivity implements View.OnClickListener{
     TextView muscleTrainingTextView;
     String textViewText;
     Intent intent;
-    Button muscleTraining_workout, muscleTraining_log, muscleTraining_recovery;
+    Button muscleTraining_workout, muscleTraining_log, muscleTraining_recovery, btnSubmit;
+    Spinner spinner;
+
+    List<Muscle> allMuscles;
+    DatabaseManager db;
+    Muscle muscle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muscle_training);
+
+        db = new DatabaseManager(this);
+        spinner = findViewById(R.id.spinner);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
         muscleTrainingTextView = findViewById(R.id.muscleTrainingTextView);
         intent = getIntent();
@@ -32,6 +46,32 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         muscleTraining_workout.setOnClickListener(this);
         muscleTraining_log.setOnClickListener(this);
         muscleTraining_recovery.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
+
+        allMuscles = db.getAllMuscles();
+        for (Muscle m : allMuscles){
+            if (m.getNombre().equalsIgnoreCase(textViewText)){
+                muscle = m;
+                break;
+            }
+        }
+
+        addItemsOnSpinner();
+
+    }
+
+    public void addItemsOnSpinner() {
+
+        List<String> list = new ArrayList<String>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
     @Override
@@ -58,8 +98,9 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
                 finishAffinity();
                 startActivity(intent);
                 break;
-            default:
-                System.out.println("nothing Clicked");
+            case R.id.btnSubmit:
+                
+                break;
         }
     }
 }

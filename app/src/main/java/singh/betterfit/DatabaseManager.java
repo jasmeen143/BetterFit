@@ -16,7 +16,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     //NOM DE LA BASE DE DADES
     private static final String DATABASE_NAME = "BetterFit";
-    // TAULA CON MUSCULOS
+    // TABLA CON MUSCULOS
     private static final String TABLE_MUSCULOS = "muscles";
     //CAMPS DE LA BASE DE TAULA
     private static final String KEY_MUSCLE_NAME = "nombre";
@@ -24,10 +24,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String KEY_MUSCLE_IMAGE = "image";
     private static final String KEY_MUSCLE_ENTRENADO = "trained";
 
-    // TAULA CON LOG
+    // TABLA CON LOG
     private static final String TABLE_LOG = "log";
     //CAMPS DE LA BASE DE TAULA
     private static final String KEY_MUSCLE_DATETIME = "traineddate";
+
+    //TABLA CON LINKS DE EXERCICIOS
+    private static final String TABLE_EXERCISES = "exercises";
+    //CAMPS DE LA BASE DE TAULA
+    private static final String KEY_MUSCLE_EXERCISE_NAME = "exname";
+    private static final String KEY_MUSCLE_EXERCISE_LINK = "exlink";
+
+    //TABLA CON LINKS DE STRETCHES
+    private static final String TABLE_STRETCHES = "stretches";
+    //CAMPS DE LA BASE DE TAULA
+    private static final String KEY_MUSCLE_STRETCH_NAME = "strname";
+    private static final String KEY_MUSCLE_STRETCH_LINK = "strlink";
 
 
     public DatabaseManager(Context context) {
@@ -38,8 +50,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableMuscles = "CREATE TABLE IF NOT EXISTS " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + " TEXT PRIMARY KEY, " + KEY_MUSCLE_DESCRIPTION + " TEXT NOT NULL, " + KEY_MUSCLE_IMAGE + " INTEGER NOT NULL, " + KEY_MUSCLE_ENTRENADO + " BOOLEAN NOT NULL " + ")";
         String createTableLog = "CREATE TABLE IF NOT EXISTS " + TABLE_LOG + "(" + KEY_MUSCLE_NAME + " TEXT NOT NULL, " + KEY_MUSCLE_DATETIME + " DATETIME, FOREIGN KEY (" + KEY_MUSCLE_NAME + ") REFERENCES " + TABLE_MUSCULOS + "(" + KEY_MUSCLE_NAME + ") ON DELETE CASCADE" + ")";
+        String createTableExercises = "";
+        String createTableStretches = "";
         db.execSQL(createTableMuscles);
         db.execSQL(createTableLog);
+        db.execSQL(createTableExercises);
+        db.execSQL(createTableStretches);
         db.execSQL("PRAGMA foreign_keys = ON;");
         System.out.println("Base de datos creado");
     }
@@ -48,7 +64,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //DROP SI EXISTEIX
         db.execSQL("DROP TABLE  IF EXISTS " + TABLE_MUSCULOS);
-
+        db.execSQL("DROP TABLE  IF EXISTS " + TABLE_LOG);
+        db.execSQL("DROP TABLE  IF EXISTS " + TABLE_EXERCISES);
+        db.execSQL("DROP TABLE  IF EXISTS " + TABLE_STRETCHES);
         // CREAR LA TABLA DE NOU
         onCreate(db);
     }

@@ -11,11 +11,38 @@
     <TextView
         android:id="@+id/muscleTrainingTextView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="#000"
-        android:text=""
-        android:layout_marginBottom="400dp"/>
+        android:layout_gravity="center"
+        android:textSize="50sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="325dp"
+            android:layout_height="63dp"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:textSize="30sp"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
+            android:layout_weight="1"
+            android:text="GET" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:id="@+id/main_recycler_view"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -72,19 +72,19 @@ public class Muscle {
 
     public List<String> addDescriptions() {
         List<String> descriptions = new ArrayList<String>();
-        descriptions.add("Abs description");
-        descriptions.add("Biceps description");
-        descriptions.add("Calves description");
-        descriptions.add("Chest description");
-        descriptions.add("Forearms description");
-        descriptions.add("Glutes description");
-        descriptions.add("Hamstrings description");
-        descriptions.add("Lats description");
-        descriptions.add("MidBack description");
-        descriptions.add("Quadriceps description");
-        descriptions.add("Shoulders description");
-        descriptions.add("Traps description");
-        descriptions.add("Triceps description");
+        descriptions.add("The rectus abdominis, the external oblique, the internal oblique, and the transverse abdominis.");
+        descriptions.add("The bis are comprised of a long and short head, hence the name bicep.");
+        descriptions.add("The calves are involved every time you take a step, stand up, or jump.");
+        descriptions.add("Pectoral muscles are most predominantly associated with movement of the shoulders and arms.");
+        descriptions.add("The brachioradialis, the wrist flexors, and the pronator teres.");
+        descriptions.add("The glutes originate from the pelvis and insert into the femur.");
+        descriptions.add("The hamstrings are the big muscles on the back of your thighs.");
+        descriptions.add("Muscle that has origin points at the mid and lower spine, the iliac crest (pelvis), and the ribs.");
+        descriptions.add("The medial, or middle, trapezius originates from the vertebral column and inserts into the scapula.");
+        descriptions.add("Consist of four heads: the rectus femoris, vastus lateralis, vastus medialis, and vastus intermedius.");
+        descriptions.add("The deltoid has three different heads: anterior (front), lateral (middle), and posterior (rear)");
+        descriptions.add("The traps are divided into three portions: the superior, medial, and inferior fibers");
+        descriptions.add("The triceps are a muscle with three heads are the long head, lateral head, and medial head.");
         return descriptions;
     }
 
