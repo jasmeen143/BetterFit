@@ -1,19 +1,31 @@
 package singh.betterfit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +42,14 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
     Intent intent, intentGoHome;
     int musclePosInAllMusclesList;
 
+    DatabaseManager db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muscle_training);
+
+        db = new DatabaseManager(this);
 
         spinner = findViewById(R.id.spinner);
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -56,6 +72,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         muscleTrainingTextView.setText("Train "+textViewText);
 
         addItemsOnSpinner();
+        defaultListView();
     }
 
     public void addItemsOnSpinner() {
@@ -72,21 +89,21 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.muscleTraining_log:
-                Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Log.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
                 break;
             case R.id.muscleTraining_recovery:
-                Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Recovery.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
                 break;
             case R.id.muscleTraining_workout:
-                Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, MainActivity.class);
                 // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
@@ -98,30 +115,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
 
                 selecedOption = String.valueOf(spinner.getSelectedItem());
                 if (selecedOption.equalsIgnoreCase("Exercises")){
-                    ArrayList<HashMap<String, String>> noName = new ArrayList<HashMap<String, String>>();
-                    List<Exercise> selectedMuscleExercises = new ArrayList<Exercise>();
-                    Exercise exerciseInstance = new Exercise();
-                    List<Exercise> allExercises = exerciseInstance.getAllExercises();
-
-                    for (Exercise ex : allExercises){
-                        if (textViewText.equalsIgnoreCase(ex.getNameMuscle())){
-                            selectedMuscleExercises.add(ex);
-                        }
-                    }
-                    for (Exercise ex : selectedMuscleExercises){
-                        String exNom = ex.getNameExercise();
-                        HashMap<String, String>  hashMap = new HashMap<String, String>();
-                        hashMap.put("nom", exNom);
-                        noName.add(hashMap);
-                    }
-                    ListAdapter adapter = new SimpleAdapter(
-                            MuscleTraining.this,
-                            noName,
-                            R.layout.row2,
-                            new String[]{"nom"},
-                            new int[]{R.id.tvName}
-                    );
-                    listViewTraining.setAdapter(adapter);
+                    defaultListView();
                 }else if(selecedOption.equalsIgnoreCase("Stretches")){
                     ArrayList<HashMap<String, String>> noName = new ArrayList<HashMap<String, String>>();
                     List<Stretches> selectedMuscleStretches = new ArrayList<Stretches>();
@@ -150,7 +144,6 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.btnFinishWorkout:
-                DatabaseManager db = new DatabaseManager(this);
                 final List<Muscle> allMuscles = db.getAllMuscles();
                 allMuscles.get(musclePosInAllMusclesList).setTrained(true);
                 db.setTrained(allMuscles.get(musclePosInAllMusclesList));
@@ -161,7 +154,42 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    /*public void defaultListView(){
+    public void defaultListView(){
+        ArrayList<HashMap<String, String>> noName = new ArrayList<HashMap<String, String>>();
+        final List<Exercise> selectedMuscleExercises = new ArrayList<Exercise>();
+        Exercise exerciseInstance = new Exercise();
+        final List<Exercise> allExercises = exerciseInstance.getAllExercises();
 
-    }*/
+        for (Exercise ex : allExercises){
+            if (textViewText.equalsIgnoreCase(ex.getNameMuscle())){
+                selectedMuscleExercises.add(ex);
+            }
+        }
+        for (Exercise ex : selectedMuscleExercises){
+            String exNom = ex.getNameExercise();
+            HashMap<String, String>  hashMap = new HashMap<String, String>();
+            hashMap.put("nom", exNom);
+            noName.add(hashMap);
+        }
+        ListAdapter adapter = new SimpleAdapter(
+                MuscleTraining.this,
+                noName,
+                R.layout.row2,
+                new String[]{"nom"},
+                new int[]{R.id.tvName}
+        );
+        listViewTraining.setAdapter(adapter);
+        listViewTraining.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View v, int position, long id) {
+                final int pos = (position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MuscleTraining.this);
+                WebView view = new WebView(MuscleTraining.this);
+                builder.setView(view);
+                builder.create().show();
+                view.loadUrl(selectedMuscleExercises.get(pos).getGifLink());
+            }
+        });
+    }
 }

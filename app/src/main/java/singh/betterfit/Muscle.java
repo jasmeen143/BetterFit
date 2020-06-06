@@ -124,7 +124,6 @@ public class Muscle {
         images.add(R.drawable.muscle_shoulders);
         images.add(R.drawable.muscle_traps);
         images.add(R.drawable.muscle_triceps);
-
         return images;
     }
     public List<Boolean> addTrained() {

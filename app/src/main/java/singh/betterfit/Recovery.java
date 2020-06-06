@@ -61,6 +61,57 @@ public class Recovery extends AppCompatActivity implements View.OnClickListener{
         recyclerView.setAdapter(recylerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        RecylerAdapter recylerAdapter;
+                        List<String> abc = new ArrayList<>();
+                        List<Integer>  intege;
+                        intege = new ArrayList<>();
+
+                        int musclePosInAllMusclesList=0;
+                        for (int i=0; i<allMuscles.size();i++){
+                            if (allMuscles.get(i).getNombre().equalsIgnoreCase(musclesNames.get(position))){
+                                musclePosInAllMusclesList = i;
+                                break;
+                            }
+                        }
+
+                        allMuscles.get(musclePosInAllMusclesList).setTrained(false);
+                        db.setTrained(allMuscles.get(musclePosInAllMusclesList));
+
+                        recylerAdapter = new RecylerAdapter(Recovery.this, abc, intege, abc);
+                        recyclerView.setAdapter(recylerAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(Recovery.this));
+
+                        noNameMethod();
+
+                        recylerAdapter = new RecylerAdapter(Recovery.this, musclesNames, muscleImages, muscleDescriptions);
+                        recyclerView.setAdapter(recylerAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(Recovery.this));
+
+                    }
+                    @Override public void onLongItemClick(View view, int position) {
+                        //Toast.makeText(MainActivity.this, "long clicked", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+    }
+    public void noNameMethod(){
+        List<Muscle> trained = db.getTrainedMuscle();
+        muscleDescriptions= new ArrayList<>();
+        muscleImages= new ArrayList<>();
+        musclesNames= new ArrayList<>();
+        muscleTrained= new ArrayList<>();
+        if (trained.size()>=0) {
+            for (int i = 0; i < trained.size(); i++) {
+                Muscle m = trained.get(i);
+                muscleImages.add(m.getImage());
+                musclesNames.add(m.getNombre());
+                muscleDescriptions.add(m.getDescription());
+                muscleTrained.add(m.isTrained());
+            }
+        }
     }
 
     @Override
