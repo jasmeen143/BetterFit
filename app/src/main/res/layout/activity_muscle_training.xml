@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <Spinner
@@ -28,7 +28,8 @@
             android:layout_width="325dp"
             android:layout_height="63dp"
             android:textAlignment="center"
-            android:textSize="15sp" />
+            android:gravity="center"
+            />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -39,10 +40,34 @@
             android:text="GET" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+
+    <ListView
+        android:id="@+id/listViewTraining"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
-        android:id="@+id/main_recycler_view"/>
+        android:layout_height="365dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/btnFinishWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Finish Workout"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:src="@drawable/menu_seperator"/>
 
     <LinearLayout
         android:layout_width="match_parent"

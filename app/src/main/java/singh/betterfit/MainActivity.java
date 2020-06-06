@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         }
 
-                        allMuscles.get(musclePosInAllMusclesList).setTrained(true);
-                        db.setTrained(allMuscles.get(musclePosInAllMusclesList));
+                        //allMuscles.get(musclePosInAllMusclesList).setTrained(true);
+                        //db.setTrained(allMuscles.get(musclePosInAllMusclesList));
 
                         recylerAdapter = new RecylerAdapter(MainActivity.this, abc, intege, abc);
                         recyclerView.setAdapter(recylerAdapter);
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         Intent intent = new Intent(MainActivity.this, MuscleTraining.class);
                         intent.putExtra("MuscleName",  allMuscles.get(musclePosInAllMusclesList).getNombre());
+                        intent.putExtra("musclePosInAllMusclesList", musclePosInAllMusclesList);
                         finishAffinity();
                         startActivity(intent);
 
@@ -97,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         textView1.setText(label1);
                         textView2.setText(label2);
 
-                        Toast.makeText(MainActivity.this, allMuscles.get(musclePosInAllMusclesList).getNombre()+" clicked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, allMuscles.get(musclePosInAllMusclesList).getNombre()+" clicked", Toast.LENGTH_SHORT).show();
                     }
                     @Override public void onLongItemClick(View view, int position) {
-                        Toast.makeText(MainActivity.this, "long clicked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "long clicked", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
@@ -110,14 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.main_log:
-                Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Log.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
                 break;
             case R.id.main_recovery:
-                Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Recovery.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         muscleImages= new ArrayList<>();
         musclesNames= new ArrayList<>();
         muscleTrained= new ArrayList<>();
-        if (NotTrained.size()>0) {
+        if (NotTrained.size()>=0) {
             for (int i = 0; i < NotTrained.size(); i++) {
                 Muscle m = NotTrained.get(i);
                 muscleImages.add(m.getImage());

@@ -7,7 +7,7 @@ public class Stretches {
     private String nameMuscle;
     private int idStretch;
     private String gifLink;
-    private static List<Stretches> allStretches;
+    private static List<Stretches> allStretches  = new ArrayList<Stretches>();;
 
     public Stretches() {}
 
@@ -41,16 +41,16 @@ public class Stretches {
         this.gifLink = gifLink;
     }
 
-    public void addAllStretches(Stretches str) {
-        allStretches = new ArrayList<Stretches>();
-        allStretches.add(str);
-    }
+
     public List<Stretches> getAllStretches(){
         createAllStretches();
         return allStretches;
     }
 
     public void createAllStretches() {
+
+        allStretches = new ArrayList<Stretches>();
+
         //ABS STRETCHES
         noNameMethod("Abs",1,"https://musclewiki.org/media/uploads/male-strech-3-side.gif");
         noNameMethod("Abs",2,"https://musclewiki.org/media/uploads/male-strech-2-front.gif");
@@ -129,5 +129,8 @@ public class Stretches {
         stretches.setIdStretch(idStretch);
         stretches.setGifLink(gifLink);
         addAllStretches(stretches);
+    }
+    public void addAllStretches(Stretches str) {
+        allStretches.add(str);
     }
 }

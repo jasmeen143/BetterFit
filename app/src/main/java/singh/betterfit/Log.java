@@ -25,14 +25,14 @@ Intent intent;
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.log_recovery:
-                Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "Recovery Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Recovery.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
                 break;
             case R.id.log_workout:
-                Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, MainActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();

@@ -41,16 +41,15 @@ public class Exercise {
         this.gifLink = gifLink;
     }
 
-    public void addAllExercises(Exercise ex) {
-        allExercises.add(ex);
-    }
-
     public List<Exercise> getAllExercises(){
         createAllExercises();
         return allExercises;
     }
 
     public void createAllExercises() {
+
+        allExercises = new ArrayList<Exercise>();
+
         //ABS EXERCISES
         noNameMethod("Abs","Crunches","https://musclewiki.org/media/uploads/Crunch-Side-021316.gif");
         noNameMethod("Abs","Forearm Plank","https://musclewiki.org/media/uploads/Plank-Side-021316.gif");
@@ -132,6 +131,10 @@ public class Exercise {
         exercise.setNameExercise(nameExercise);
         exercise.setGifLink(gifLink);
         addAllExercises(exercise);
+    }
+
+    public void addAllExercises(Exercise ex) {
+        allExercises.add(ex);
     }
 
 

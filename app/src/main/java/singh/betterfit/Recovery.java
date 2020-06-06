@@ -67,14 +67,14 @@ public class Recovery extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.recovery_log:
-                Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, Log.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
                 break;
             case R.id.recovery_workout:
-                Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "Workout Clicked", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, MainActivity.class);
                // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
