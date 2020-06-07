@@ -169,8 +169,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
 
                             LayoutInflater factory = LayoutInflater.from(MuscleTraining.this);
                             final View alertDialog = factory.inflate(R.layout.alertdialog, null);
-                            ImageView imageView = (ImageView) alertDialog.findViewById(R.id.webviewAlertDialog);
-                            //imageView.setImageBitmap(bmp);
+                            ImageView imageView = (ImageView) alertDialog.findViewById(R.id.viewAlertDialog);
                             Glide.with(MuscleTraining.this).load(gifURL).into(imageView);
                             AlertDialog.Builder alertadd = new AlertDialog.Builder(MuscleTraining.this);
                             alertadd.setView(alertDialog);
@@ -223,8 +222,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
 
                 LayoutInflater factory = LayoutInflater.from(MuscleTraining.this);
                 final View alertDialog = factory.inflate(R.layout.alertdialog, null);
-                ImageView imageView = (ImageView) alertDialog.findViewById(R.id.webviewAlertDialog);
-                //imageView.setImageBitmap(bmp);
+                ImageView imageView = (ImageView) alertDialog.findViewById(R.id.viewAlertDialog);
                 Glide.with(MuscleTraining.this).load(gifURL).into(imageView);
                 AlertDialog.Builder alertadd = new AlertDialog.Builder(MuscleTraining.this);
                 alertadd.setView(alertDialog);
