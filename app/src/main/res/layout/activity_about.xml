@@ -7,6 +7,54 @@
     android:orientation="vertical"
     tools:context=".about">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="555dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="BETTERFIT"
+            android:textSize="50sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#000"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Website Used: 'https://musclewiki.org/'"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#000"
+            />
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/icon"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AppIcon"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Made By: Jasmeen and Joaquin"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,19 +112,19 @@
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="WORKOUT"
+            android:text="@string/workout"
             android:textColor="#000000"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
             android:textColor="#000000"
-            android:text="RECOVERY"
+            android:text="@string/recovery"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="LOG"
+            android:text="@string/about"
             android:textColor="#000000"
             android:textAlignment="center" />
     </LinearLayout>

@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="@string/log"
+            android:text="@string/about"
             android:textColor="#000000"
             android:textAlignment="center" />
     </LinearLayout>
