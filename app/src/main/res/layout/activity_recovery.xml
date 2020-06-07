@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Para poder entrenar el musculo necessitas recuperar."
+        android:text="@string/title_recovery"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#000"
@@ -79,19 +79,19 @@
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="WORKOUT"
+            android:text="@string/workout"
             android:textColor="#000000"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
             android:textColor="#000000"
-            android:text="RECOVERY"
+            android:text="@string/recovery"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="LOG"
+            android:text="@string/log"
             android:textColor="#000000"
             android:textAlignment="center" />
     </LinearLayout>

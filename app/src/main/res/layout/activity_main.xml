@@ -42,7 +42,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:text="Tap on the muscle you want to train"
+        android:text="@string/title_workout"
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:textColor="#000"/>
@@ -112,19 +112,19 @@
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="WORKOUT"
+            android:text="@string/workout"
             android:textColor="#000000"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
             android:textColor="#000000"
-            android:text="RECOVERY"
+            android:text="@string/recovery"
             android:textAlignment="center" />
         <TextView
             android:layout_width="136dp"
             android:layout_height="match_parent"
-            android:text="LOG"
+            android:text="@string/log"
             android:textColor="#000000"
             android:textAlignment="center" />
     </LinearLayout>

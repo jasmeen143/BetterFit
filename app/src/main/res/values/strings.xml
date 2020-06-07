@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BetterFit</string>
+    <string name="title_recovery">Para poder entrenar el musculo necessitas recuperar.</string>
+    <string name="workout">WORKOUT</string>
+    <string name="recovery">RECOVERY</string>
+    <string name="log">LOG</string>
+    <string name="title_workout">Tap on the muscle you want to train</string>
 </resources>
