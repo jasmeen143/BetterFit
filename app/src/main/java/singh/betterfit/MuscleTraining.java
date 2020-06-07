@@ -2,21 +2,29 @@ package singh.betterfit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.core.view.LayoutInflaterFactory;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.text.Layout;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -27,9 +35,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class MuscleTraining extends AppCompatActivity implements View.OnClickListener{
 
@@ -48,6 +65,10 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muscle_training);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         db = new DatabaseManager(this);
 
@@ -90,7 +111,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.muscleTraining_log:
                 //Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, Log.class);
+                intent = new Intent(this, about.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);
@@ -118,7 +139,7 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
                     defaultListView();
                 }else if(selecedOption.equalsIgnoreCase("Stretches")){
                     ArrayList<HashMap<String, String>> noName = new ArrayList<HashMap<String, String>>();
-                    List<Stretches> selectedMuscleStretches = new ArrayList<Stretches>();
+                    final List<Stretches> selectedMuscleStretches = new ArrayList<Stretches>();
                     Stretches stretchesInstance = new Stretches();
                     List<Stretches> allStretches = stretchesInstance.getAllStretches();
                     for (Stretches str : allStretches){
@@ -141,6 +162,22 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
 
                     );
                     listViewTraining.setAdapter(adapter);
+                    listViewTraining.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View v, int position, long id) {
+                            String gifURL = selectedMuscleStretches.get((position)).getGifLink();
+
+                            LayoutInflater factory = LayoutInflater.from(MuscleTraining.this);
+                            final View alertDialog = factory.inflate(R.layout.alertdialog, null);
+                            ImageView imageView = (ImageView) alertDialog.findViewById(R.id.webviewAlertDialog);
+                            //imageView.setImageBitmap(bmp);
+                            Glide.with(MuscleTraining.this).load(gifURL).into(imageView);
+                            AlertDialog.Builder alertadd = new AlertDialog.Builder(MuscleTraining.this);
+                            alertadd.setView(alertDialog);
+                            //alertadd.setNegativeButton("Done", null);
+                            alertadd.show();
+                        }
+                    });
                 }
                 break;
             case R.id.btnFinishWorkout:
@@ -182,13 +219,17 @@ public class MuscleTraining extends AppCompatActivity implements View.OnClickLis
         listViewTraining.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int position, long id) {
-                final int pos = (position);
+                String gifURL = selectedMuscleExercises.get((position)).getGifLink();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MuscleTraining.this);
-                WebView view = new WebView(MuscleTraining.this);
-                builder.setView(view);
-                builder.create().show();
-                view.loadUrl(selectedMuscleExercises.get(pos).getGifLink());
+                LayoutInflater factory = LayoutInflater.from(MuscleTraining.this);
+                final View alertDialog = factory.inflate(R.layout.alertdialog, null);
+                ImageView imageView = (ImageView) alertDialog.findViewById(R.id.webviewAlertDialog);
+                //imageView.setImageBitmap(bmp);
+                Glide.with(MuscleTraining.this).load(gifURL).into(imageView);
+                AlertDialog.Builder alertadd = new AlertDialog.Builder(MuscleTraining.this);
+                alertadd.setView(alertDialog);
+                //alertadd.setNegativeButton("Done", null);
+                alertadd.show();
             }
         });
     }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MuscleTraining"></activity>
-        <activity android:name=".Log" />
+        <activity android:name=".about" />
         <activity android:name=".Recovery" />
         <activity android:name=".MainActivity">
             <intent-filter>

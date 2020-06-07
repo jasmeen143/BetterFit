@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +118,7 @@ public class Recovery extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.recovery_log:
              //   Toast.makeText(this, "Log Clicked", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, Log.class);
+                intent = new Intent(this, about.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finishAffinity();
                 startActivity(intent);

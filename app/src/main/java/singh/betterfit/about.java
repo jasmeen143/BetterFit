@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-public class Log extends AppCompatActivity implements View.OnClickListener{
+public class about extends AppCompatActivity implements View.OnClickListener{
 Intent intent;
     Button recovery,workout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log);
+        setContentView(R.layout.activity_about);
         recovery=findViewById(R.id.log_recovery);
         workout=findViewById(R.id.log_workout);
 
